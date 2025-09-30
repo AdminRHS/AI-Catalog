@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MidJourney – Creativity Powered by AI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1F2937;
+            color: #eee2ff;
+        }
+
+        .header-wrapper {
+    position: relative;
+    width: 100%;
+    border: 1.5px solid #7947a27a;
+    border-radius: 20px;
+    box-shadow: 0 0 25px #522d6f, 0 0 50px #2d2534, 0 0 75px #6d587d;
+    overflow: hidden;
+    padding: 0;
+    margin-bottom: 50px;
+    z-index: 10;
+}
+
+/* Header container with gradient overlay */
+.header-container {
+    position: relative;
+    width: 100%;
+    padding-left: 32px;
+    padding-bottom: 32px;
+    padding-top: 32px;
+    border-radius: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Mascot as background */
+.mascot-bg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center bottom;
+    opacity: 0.8;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Header content */
+.header-content {
+    position: relative;
+    z-index: 1;
+    max-width: 50%;
+    color: #eee2ff;
+    padding-left: 50px;
+}
+
+.header-content h1 {
+    font-size: 3.5em;
+    margin-bottom: 20px;
+}
+
+.header-content p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    width: 550px;
+}
+
+.cta-button {
+    background-color: #8140a1;
+    color: white;
+    padding: 15px 25px;
+    font-size: 1.2em;
+    text-decoration: none;
+    border-radius: 10px;
+    display: inline-block;
+    box-shadow: 0 0 15px rgba(196, 196, 249, 0.6);
+    transition: all 0.3s ease;
+    margin-top: 32px;
+}
+
+.cta-button:hover {
+    background-color: #9867bf;
+    box-shadow: 0 0 25px #9867BF, 0 0 50px #9867BF;
+}
+
+/* Bookmark icon */
+.bookmark-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    color: #eee2ff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 5;
+}
+
+.bookmark-icon:hover {
+    color: #9867BF;
+    text-shadow: 0 0 15px #9867BF, 0 0 30px #9867BF;
+}
+
+/* Beginner badge */
+.badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: rgba(152, 103, 191, 0.5);
+    padding: 5px 12px;
+    border: 1px solid #9867BF;
+    border-radius: 12px;
+    color: #eee2ff;
+    font-weight: lighter;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 0 4px #9867BF, 0 0 15px #9867BF;
+    z-index: 5;
+    margin-left: 70px;
+}
+
+.badge-icon {
+    width: 18px;
+    height: 18px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .header-container {
+        flex-direction: column;
+        height: 500px;
+        padding: 30px;
+    }
+    .header-content {
+        max-width: 100%;
+        text-align: center;
+        padding-left: 0;
+        margin-bottom: 20px;
+    }
+    .mascot-bg {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center bottom;
+    }
+}
+        /* Overview Section */
+        .overview {
+            padding: 60px 5%;
+            background-color: #1F2937;
+            text-align: center;
+        }
+
+        .overview h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #ecd4ff; /* Акцентний фіолетовий */
+        }
+
+        .overview p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        /* Section for Designers */
+        .designers-list {
+            display: flex;
+            justify-content: space-around;
+            gap: 30px;
+            align-items: center;
+            margin-top: 40px;
+            flex-wrap: wrap; /* Додаємо можливість розміщення на декілька рядків */
+        }
+
+        .designer-item {
+            text-align: center;
+        }
+
+        .designer-item img {
+            width: 150px; /* Маскоти мають ширину 80px */
+            height: 150px; /* Маскоти мають висоту 80px */
+            border-radius: 50%; /* Кругла форма */
+            box-shadow: 0 0 20px rgba(152, 103, 191, 0.8); /* Неонове світло */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .designer-item img:hover {
+            transform: scale(1.1); /* Ефект підскокування */
+            box-shadow: 0 0 30px rgba(152, 103, 191, 1); /* Яскравіше підсвічування */
+        }
+
+        .designer-item h3 {
+            margin-top: 10px;
+            font-size: 1.5em;
+            color: #d3bde4; /* Акцентний фіолетовий */
+        }
+
+
+
+
+/* Glow animation sequence */
+@keyframes sequential-glow {
+    0%, 70%, 100% { box-shadow: 0 0 0 rgba(152,103,191,0); }
+    35% { box-shadow: 0 0 20px rgba(152,103,191,1), 0 0 40px rgba(152,103,191,0.7), 0 0 60px rgba(152,103,191,0.5); }
+}
+
+/* Анімація для команд */
+.commands-column .command-item .command-shortcut {
+    animation: sequential-glow 2.7s infinite;
+}
+
+/* Затримки для почергового ефекту */
+.commands-column .command-item:nth-child(1) .command-shortcut { animation-delay: 0s; }
+.commands-column .command-item:nth-child(2) .command-shortcut { animation-delay: 0.3s; }
+.commands-column .command-item:nth-child(3) .command-shortcut { animation-delay: 0.6s; }
+.commands-column .command-item:nth-child(4) .command-shortcut { animation-delay: 0.9s; }
+.commands-column .command-item:nth-child(5) .command-shortcut { animation-delay: 1.2s; }
+.commands-column .command-item:nth-child(6) .command-shortcut { animation-delay: 1.5s; }
+.commands-column .command-item:nth-child(7) .command-shortcut { animation-delay: 1.8s; }
+.commands-column .command-item:nth-child(8) .command-shortcut { animation-delay: 2.1s; }
+.commands-column .command-item:nth-child(9) .command-shortcut { animation-delay: 2.4s; }
+
+.commands-column {
+    width: 700px;
+}
+
+/* Маленька рамка навколо шорткату */
+.command-shortcut {
+    display: inline-block;
+    padding: 4px 10px;
+    border: 2px solid #9867BF;
+    border-radius: 6px;
+    color: #ecd4ff;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    font-size: 20px;
+}
+
+/* Hover ефект */
+.command-shortcut:hover {
+    box-shadow: 0 0 15px #9867BF, 0 0 30px #9867BF, 0 0 45px #9867BF;
+    transform: translateY(-2px);
+}
+
+/* Опис команд */
+.command-desc {
+    color: #d3bde4;
+    line-height: 1.4em;
+    flex: 1;
+    font-size: 1.3em;
+}
+
+/* Сітка для колонок */
+.command-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* ліва колонка ширша за праву */
+    gap: 30px;
+    align-items: center;
+    padding-left: 80px;
+}
+
+/* Маскот праворуч */
+.mascot-column {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.mascot-placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px; /* Заповнює весь контейнер, обрізаючи зайве */
+}
+    /* Відступ між рядками команд */
+.command-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px; /* Відстань між шорткатом і описом */
+    margin-bottom: 20px; /* Відстань між рядками */
+}
+
+
+/* Адаптивність для мобільних */
+@media(max-width:900px){
+    .command-grid {
+        grid-template-columns: 1fr;
+    }
+    .mascot-column {
+        justify-content: flex-start;
+        margin-top: 20px;
+    }
+    /* Відступ між рядками команд */
+.command-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px; /* Відстань між шорткатом і описом */
+    margin-bottom: 20px; /* Відстань між рядками */
+}
+
+
+
+
+}
+
+        /* Features Section */
+        .features {
+            background-color: #1F2937;
+            padding: 80px 5%;
+            text-align: center;
+        }
+
+        .features h2 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            color: #ecd4ff; /* Акцентний фіолетовий */
+        }
+
+        .features-wrapper {
+            display: flex;
+            justify-content: space-around;
+            gap: 40px;
+        }
+
+        .feature {
+                border: 2px solid #9867BF;
+    background-color: #684abd24;
+            border-radius: 10px;
+            padding: 30px;
+            width: 30%;
+            box-shadow: 0 0 20px rgba(196, 196, 249, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature h3 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #ecd4ff;
+        }
+
+        .feature p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #d3bde4;
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(196, 196, 249, 0.8);
+        }
+
+
+         .course:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(196, 196, 249, 0.8);
+            box-shadow: 0 0 15px rgba(152, 103, 191, 0.6);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+
+        /* Prompt Library Section */
+        .prompt-library {
+            padding: 60px 5%;
+            background-color: #1F2937;
+            text-align: center;
+        }
+
+        .prompt-library h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #ecd4ff; /* Акцентний фіолетовий */
+        }
+
+        .prompt-library p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        .cta-library {
+            background-color: #6b3a96; /* Акцентний фіолетовий */
+            color: white;
+            padding: 15px 25px;
+            font-size: 1.2em;
+            text-decoration: none;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0 0 15px rgba(196, 196, 249, 0.6);
+        }
+
+        .cta-library:hover {
+            background-color: #9867bf; /* Трохи темніший фіолетовий при ховері */
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1F2937;
+            text-align: center;
+            padding: 40px 20px;
+            color: #a3a3a3;
+        }
+
+        footer p {
+            font-size: 1.1em;
+        }
+
+        footer a {
+            color: #c4c4f9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+   
+/* Image Work Capabilities styles */
+.capabilities-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.capability {
+    border: 2px solid #9867BF; /* неоновий акцентний колір */
+    background-color: #684abd24; /* прозорий фон 50% */
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(152, 103, 191, 0.6); /* легке неонове світло */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.capability:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(152, 103, 191, 1); /* підсвічування при ховері */
+}
+
+.capability h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    color: #ecd4ff; /* акцентний колір */
+}
+
+.capability p {
+    margin: 0;
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #d3bde4;
+}
+    /* Prompt Library Section */
+    .prompt-library {
+        padding: 60px 5%;
+        background-color: #1F2937;
+        text-align: center;
+    }
+
+    .prompt-library h2 {
+        font-size: 2.5em;
+        margin-bottom: 30px;
+        color: #ecd4ff; /* Акцентний фіолетовий */
+    }
+
+    .prompt-library p {
+        font-size: 1.2em;
+        line-height: 1.6;
+    }
+
+    /* prompt Card Styles */
+    .prompt-card {
+        background-color: #684abd4a;
+        border: 2px solid #9867BF;
+        border-radius: 12px;
+        padding: 30px;
+        width: 220px;
+        text-align: center;
+        color: #eee2ff;
+        text-decoration: none;
+        box-shadow: 0 0 15px rgba(152, 103, 191, 0.6);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .prompt-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 25px rgba(152, 103, 191, 1), 0 0 50px rgba(152, 103, 191, 0.7);
+    }
+
+    .prompt-card h3 {
+        margin-bottom: 10px;
+        color: #ecd4ff;
+    }
+
+    .prompt-card p {
+        font-size: 1em;
+        color: #d3bde4;
+        line-height: 1.4em;
+    }
+
+</style>
+</head>
+<body>
+
+<div class="header-wrapper">
+    <div class="badge">
+        <img src="https://www.dropbox.com/scl/fi/mx4cqlodq8ts09an2vqgi/medal-ribbon-svgrepo-com-1.png?rlkey=12q2nsqzj24sz6j942liuajvn&dl=1" alt="Beginner Icon" class="badge-icon">
+        <span>Beginner Level</span>
+    </div>
+
+    <div class="bookmark-icon" title="Add to bookmarks">
+        &#9733;
+    </div>
+
+    <div class="header-container">
+        <div class="mascot-bg" style="background-image: url('https://www.dropbox.com/scl/fi/0dmm2g42phrqsrhr8oe17/Frame-7.png?rlkey=jkcgl1r429aipx6e4tggm2jor&dl=1');"></div>
+
+        <div class="header-content">
+            <h1>MidJourney</h1>
+            <p>MidJourney is a powerful tool for generating images using artificial intelligence. Turn your ideas and concepts into unique visuals in seconds. Perfect for designers, artists, and marketers seeking creative solutions.</p>
+            <a href="https://www.midjourney.com" class="cta-button">Try it now!</a>
+        </div>
+    </div>
+</div>
+
+
+<section class="overview">
+    <h2>Applicable Fields</h2>
+    <div class="designers-list">
+        <div class="designer-item">
+            <img src="https://www.dropbox.com/scl/fi/voyf5atzv4vszd0mchbq9/image-2246.png?rlkey=1civp1obd5kohs41b9hn0q7fl&dl=1" alt="UI/UX Designer Mascot">
+            <h3>UI/UX Designers</h3>
+        </div>
+        
+        <div class="designer-item">
+            <img src="https://www.dropbox.com/scl/fi/dxsdow3t9m04pdlajzs5n/illustrators.png?rlkey=a8v8egzsaq9vfo5hrgb3apj5w&dl=1" alt="Illustrator Mascot">
+            <h3>Illustrators</h3>
+        </div>
+
+        <div class="designer-item">
+            <img src="https://www.dropbox.com/scl/fi/muvml6evg3pcfu923u8kf/graphic-designers.png?rlkey=sh7ulrn4t2hnvafsnet7kxs21&dl=1" alt="Graphic Designer Mascot">
+            <h3>Graphic Designers</h3>
+        </div>
+
+        <div class="designer-item">
+            <img src="https://www.dropbox.com/scl/fi/nnr1jthb75uprk0q12g5m/interior-designers.png?rlkey=xem72kb6xvbyfzx2w0wwj846m&dl=1" alt="Interior Designer Mascot">
+            <h3>Interior Designers</h3>
+        </div>
+
+        <div class="designer-item">
+            <img src="https://www.dropbox.com/scl/fi/98o3yyp50gyskv4f04jqi/3D-designers.png?rlkey=z541rctbctxhbncjaa0t14e3g&dl=1" alt="3D Designer Mascot">
+            <h3>3D Designers</h3>
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <h2>Main Features</h2>
+    <div class="features-wrapper">
+        <div class="feature">
+            <img src="https://www.dropbox.com/scl/fi/utnnvbjba3m2e2d4aoaaw/Group-6.png?rlkey=9jdisfrs89ryzudzavx2h3j0w&dl=1" alt="Photorealistic Icon" style="width:70px; display:block; margin:0 auto 15px;">
+            <h3>Photorealistic Images</h3>
+            <p>Create stunning photorealistic images, from concept art to realistic landscapes and portraits.</p>
+        </div>
+
+        <div class="feature">
+            <img src="https://www.dropbox.com/scl/fi/aw42trbt4kzcvfwgh94kt/Group.png?rlkey=jzc0xvm4ggwhi20bgbkxwteat&dl=1" alt="Illustration Icon" style="width:70px; display:block; margin:0 auto 15px;">
+            <h3>Illustrations in Various Styles</h3>
+            <p>Generate illustrations in a variety of styles, from abstraction to hyper-realistic art.</p>
+        </div>
+
+        <div class="feature">
+            <img src="https://www.dropbox.com/scl/fi/zfktwl2bwylqobel5lc9k/hand_x2C__rating_x2C__smile_x2C__emoji_x2C__choice.png?rlkey=zgduqjegwgpfai5axoe6kcvrb&dl=1" alt="Variations Icon" style="width:70px; display:block; margin:0 auto 15px;">
+            <h3>Generate Variations</h3>
+            <p>Create multiple variations of one image to find the perfect result.</p>
+        </div>
+    </div>
+</section>
+
+
+<section class="commands-section" style="padding:60px 5%; background-color:#1F2937;">
+
+    <div class="command-shortcut-section">
+       <h2 style="font-size:2.5em; margin-bottom:40px; color:#ecd4ff; text-align: center;">Commands</h2>
+
+        <div class="command-grid">
+            <div class="commands-column" id="commands-list">
+                <div class="command-item">
+                    <span class="command-shortcut">/imagine</span> - <span class="command-desc">Create images based on your text prompt.</span>
+                </div>
+                <div class="command-item">
+                    <span class="command-shortcut">/settings</span> - <span class="command-desc">Adjust version, mode, privacy, and generation speed.</span>
+                </div>
+                <div class="command-item">
+                    <span class="command-shortcut">/info</span> - <span class="command-desc">View your subscription info.</span>
+                </div>
+                <div class="command-item">
+                    <span class="command-shortcut">/subscribe</span> - <span class="command-desc">Select and pay for a suitable plan.</span>
+                </div>
+                <div class="command-item">
+                    <span class="command-shortcut">/blend</span> - <span class="command-desc">Combine multiple images into one.</span>
+                </div>
+                <div class="command-item">
+                    <span class="command-shortcut">/prefer option set</span> - <span class="command-desc">Save frequently used settings.</span>
+                </div>
+                <div class="command-item">
+                    <span class="command-shortcut">/prefer option list</span> - <span class="command-desc">View all saved settings for quick switching.</span>
+                </div>
+                <div class="command-item">
+                    <span class="command-shortcut">/help</span> - <span class="command-desc">Get tips and guidance for using the bot.</span>
+                </div>
+            </div>
+            <div class="mascot-column">
+                <img src="https://www.dropbox.com/scl/fi/e0avucr3jkur4tf1mjmvb/ChatGPT-Image-Sep-25-2025-09_40_42-AM.png?rlkey=jbb2y33pumafp1gxooufyvnna&dl=1" alt="Command Mascot" class="mascot-placeholder">
+            </div>
+        </div>
+    </div>
+
+    <div class="command-shortcut-section" style="margin-top:80px;">
+        <h2 style="font-size:2.5em; margin-bottom:40px; color:#ecd4ff; display: flex; justify-content: center;">Shortcuts</h2>
+        <div class="command-grid">
+            <div class="commands-column" id="shortcuts-list">
+                <div class="command-item">
+                    <span class="command-shortcut">--ar</span> - <span class="command-desc">Set image aspect ratio.</span>
+                </div>
+                <div class="command-item">
+                    <span class="command-shortcut">--q</span> - <span class="command-desc">Set image quality (0.25–5).</span>
+                </div>
+                <div class="command-item">
+                    <span class="command-shortcut">--no</span> - <span class="command-desc">Exclude details, e.g., "--no dog".</span>
+                </div>
+                <div class="command-item">
+                    <span class="command-shortcut">--uplight</span> - <span class="command-desc">Softer upscaling for minimal change.</span>
+                </div>
+                <div class="command-item">
+                    <span class="command-shortcut">::</span> - <span class="command-desc">Adjust importance of prompt parts (-1 to 2).</span>
+                </div>
+                <div class="command-item">
+                    <span class="command-shortcut">--iw</span> - <span class="command-desc">Set image weight relative to text.</span>
+                </div>
+                <div class="command-item">
+                    <span class="command-shortcut">--chaos</span> - <span class="command-desc">Control randomness/diversity (0–100).</span>
+                </div>
+                <div class="command-item">
+                    <span class="command-shortcut">--seed</span> - <span class="command-desc">Generate repeatable results (0–4294967295).</span>
+                </div>
+                <div class="command-item">
+                    <span class="command-shortcut">--s</span> - <span class="command-desc">Set stylization strength (higher = more stylized).</span>
+                </div>
+            </div>
+            <div class="mascot-column">
+                <img src="https://www.dropbox.com/scl/fi/ibytgib98r6og1n5bbk20/ChatGPT-Image-Sep-25-2025-09_43_19-AM.png?rlkey=xo3h3sa2nmm77m16uz710j875&dl=1" alt="Shortcut Mascot" class="mascot-placeholder">
+            </div>
+        </div>
+    </div>
+</section>
+
+  <style>
+        /* ...твої попередні стилі... */
+
+        /* Маскоти в Commands & Shortcuts */
+        .mascot-column img.mascot-placeholder {
+            border-radius: 12px;
+            border: 2px solid #9867BF;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(152,103,191,0.5);
+        }
+
+        /* Hover ефект неонової рамки */
+        .mascot-column img.mascot-placeholder:hover {
+            box-shadow:
+                0 0 20px #9867BF,
+                0 0 40px #9867BF,
+                0 0 60px #9867BF;
+            transform: translateY(-2px);
+        }
+
+    </style>
+
+
+    <section class="features">
+    <h2>Image Work Capabilities</h2>
+    <div class="features-wrapper">
+        <div class="feature">
+            <img src="https://www.dropbox.com/scl/fi/mgk5yt37fp136x4fher9m/Vector2.png?rlkey=t7ebgmbncmxwgl6mmvkr6spr5&dl=1" alt="Image Size Icon" style="width:70px; display:block; margin:0 auto 15px;">
+            <h3>Image Size</h3>
+            <p>Adjust the final image size, from small icons to large visuals for posters.</p>
+        </div>
+
+        <div class="feature">
+            <img src="https://www.dropbox.com/scl/fi/ivuhwt0v6nyt9pflw7azn/Vector1.png?rlkey=vnynb449prlig6xq606rntofg&dl=1" alt="Styling Icon" style="width:70px; display:block; margin:0 auto 15px;">
+            <h3>Styling</h3>
+            <p>Modify lighting, color palette, and artistic style to achieve the desired effect (e.g., pin-up photography or surrealistic paintings).</p>
+        </div>
+
+        <div class="feature">
+            <img src="https://www.dropbox.com/scl/fi/ayqgpqykw36lbsabj3kux/Vector.png?rlkey=jp8zt2trmhwk5713mvwwpi9nj&dl=1" alt="AI Functions Icon" style="width:70px; display:block; margin:0 auto 15px;">
+            <h3>AI Functions</h3>
+            <p>Choose from various modes like universal mode, stylized modes for different artists and genres, and variation mode for creating multiple iterations based on one prompt.</p>
+        </div>
+    </div>
+</section>
+
+
+
+
+<style>
+.prompt-card {
+    background-color: rgba(104, 74, 189, 0.3);
+    border: 2px solid #9867BF;
+    border-radius: 12px;
+    padding: 30px;
+    width: 220px;
+    text-align: center;
+    color: #eee2ff;
+    text-decoration: none;
+    box-shadow: 0 0 10px rgba(152, 103, 191, 0.5);
+    transition: all 0.3s ease;
+}
+
+.prompt-card h3 {
+    margin-bottom: 10px;
+    color: #ecd4ff;
+}
+
+.prompt-card p {
+    font-size: 1em;
+    color: #d3bde4;
+    line-height: 1.4em;
+}
+
+/* Glow effect on hover */
+.prompt-card:hover {
+    border-color: #f2a1ff;
+    box-shadow: 
+        0 0 20px #f2a1ff,
+        0 0 40px #f2a1ff,
+        0 0 60px #f2a1ff;
+    transform: translateY(-5px);
+}
+</style>
+
+<section style="padding: 60px 5%; background-color: #1F2937;">
+    <h2 style="font-size: 2.5em; color: #ecd4ff; margin-bottom: 30px; text-align: center;">Recommended Courses</h2>
+
+    <div style="position: relative;">
+        <div id="courses-container" style="display: flex; gap: 20px; flex-wrap: nowrap; overflow-x: auto; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; padding: 10px 5px; margin: 0 50px; scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none;">
+
+            <style>
+                #courses-container::-webkit-scrollbar {
+                    display: none;
+                }
+            </style>
+
+            <div class="course" style="background-color: rgba(152, 103, 191, 0.3); border: 2px solid #9867BF; border-radius: 15px; padding: 15px; width: 300px; flex-shrink: 0; display: flex; flex-direction: column; gap: 10px; scroll-snap-align: start;">
+                <img src="https://www.dropbox.com/scl/fi/yqm6b7dlulah404te2rsb/marta-2.png?rlkey=p0ok4blgulbxkitujo3a56wns&dl=1" alt="Course 1 Image" style="width: 100%; height: 200px; object-fit: contain; border-radius: 12px;">
+                <h3 style="font-size: 1.4em; color: #ecd4ff; margin: 0;">MidJourney Basics</h3>
+                <p style="color: #d3bde4; margin: 0; flex-grow: 1;">Intro course for beginners learning text-to-image generation.</p>
+                <div style="display: flex; gap: 15px; font-size: 0.9em; color: #d3bde4; align-items: center; margin-top: auto;">
+                    <span>⏱ 45 min</span>
+                    <span>📚 5 lessons</span>
+                </div>
+            </div>
+
+            <div class="course" style="background-color: rgba(152, 103, 191, 0.3); border: 2px solid #9867BF; border-radius: 15px; padding: 15px; width: 300px;  flex-shrink: 0; display: flex; flex-direction: column; gap: 10px; scroll-snap-align: start;">
+                <img src="https://www.dropbox.com/scl/fi/ysgdd4t7xqj6y6c9na2ss/ChatGPT-Image-Sep-24-2025-09_20_58-AM.png?rlkey=pz4pmzujw6fyxv94foy65yrh3&dl=1" alt="Course 2 Image" style="width: 100%; height: 200px; object-fit: contain; border-radius: 12px;">
+                <h3 style="font-size: 1.4em; color: #ecd4ff; margin: 0;">Advanced Prompts</h3>
+                <p style="color: #d3bde4; margin: 0; flex-grow: 1;">Learn to create complex prompts and customize image outputs.</p>
+                <div style="display: flex; gap: 15px; font-size: 0.9em; color: #d3bde4; align-items: center; margin-top: auto;">
+                    <span>⏱ 60 min</span>
+                    <span>📚 8 lessons</span>
+                </div>
+            </div>
+
+            <div class="course" style="background-color: rgba(152, 103, 191, 0.3); border: 2px solid #9867BF; border-radius: 15px; padding: 15px; width: 300px;  flex-shrink: 0; display: flex; flex-direction: column; gap: 10px; scroll-snap-align: start;">
+                <img src="https://www.dropbox.com/scl/fi/ufc9ac8ibhf1rcfushq1w/marta.png?rlkey=gh68e57kr8ox4jgcbkzk0m5jw&dl=1" alt="Course 3 Image" style="width: 100%; height: 200px; object-fit: contain; border-radius: 12px;">
+                <h3 style="font-size: 1.4em; color: #ecd4ff; margin: 0;">Styling & Variations</h3>
+                <p style="color: #d3bde4; margin: 0; flex-grow: 1;">Master styles, lighting, and image variations with MidJourney.</p>
+                <div style="display: flex; gap: 15px; font-size: 0.9em; color: #d3bde4; align-items: center; margin-top: auto;">
+                    <span>⏱ 50 min</span>
+                    <span>📚 6 lessons</span>
+                </div>
+            </div>
+
+            <div class="course" style="background-color: rgba(152, 103, 191, 0.3); border: 2px solid #9867BF; border-radius: 15px; padding: 15px; width: 300px;   flex-shrink: 0; display: flex; flex-direction: column; gap: 10px; scroll-snap-align: start;">
+                <img src="https://www.dropbox.com/scl/fi/ykvrqm8dfice0061auq0u/ChatGPT-Image-Sep-24-2025-09_20_46-AM.png?rlkey=sulnk49bnrp02a5p42j1m150t&dl=1" alt="Course 4 Image" style="width: 100%; height: 200px; object-fit: contain; border-radius: 12px;">
+                <h3 style="font-size: 1.4em; color: #ecd4ff; margin: 0;">Creative Techniques</h3>
+                <p style="color: #d3bde4; margin: 0; flex-grow: 1;">Tips to enhance your creative process with AI-generated images.</p>
+                <div style="display: flex; gap: 15px; font-size: 0.9em; color: #d3bde4; align-items: center; margin-top: auto;">
+                    <span>⏱ 55 min</span>
+                    <span>📚 7 lessons</span>
+                </div>
+            </div>
+
+            <div class="course" style="background-color: rgba(152, 103, 191, 0.3); border: 2px solid #9867BF; border-radius: 15px; padding: 15px; width: 300px;   flex-shrink: 0; display: flex; flex-direction: column; gap: 10px; scroll-snap-align: start;">
+                <img src="https://www.dropbox.com/scl/fi/yqm6b7dlulah404te2rsb/marta-2.png?rlkey=p0ok4blgulbxkitujo3a56wns&dl=1" alt="Course 5 Image" style="width: 100%; height: 200px; object-fit: contain; border-radius: 12px;">
+                <h3 style="font-size: 1.4em; color: #ecd4ff; margin: 0;">New Course Idea 1</h3>
+                <p style="color: #d3bde4; margin: 0; flex-grow: 1;">Another exciting course to fill the space and demonstrate scroll.</p>
+                <div style="display: flex; gap: 15px; font-size: 0.9em; color: #d3bde4; align-items: center; margin-top: auto;">
+                    <span>⏱ 40 min</span>
+                    <span>📚 4 lessons</span>
+                </div>
+            </div>
+
+            <div class="course" style="background-color: rgba(152, 103, 191, 0.3); border: 2px solid #9867BF; border-radius: 15px; padding: 15px; width: 300px;   flex-shrink: 0; display: flex; flex-direction: column; gap: 10px; scroll-snap-align: start;">
+                <img src="https://www.dropbox.com/scl/fi/ysgdd4t7xqj6y6c9na2ss/ChatGPT-Image-Sep-24-2025-09_20_58-AM.png?rlkey=pz4pmzujw6fyxv94foy65yrh3&dl=1" alt="Course 6 Image" style="width: 100%; height: 200px; object-fit: contain; border-radius: 12px;">
+                <h3 style="font-size: 1.4em; color: #ecd4ff; margin: 0;">New Course Idea 2</h3>
+                <p style="color: #d3bde4; margin: 0; flex-grow: 1;">Another exciting course to fill the space and demonstrate scroll.</p>
+                <div style="display: flex; gap: 15px; font-size: 0.9em; color: #d3bde4; align-items: center; margin-top: auto;">
+                    <span>⏱ 70 min</span>
+                    <span>📚 9 lessons</span>
+                </div>
+            </div>
+
+        </div>
+
+        <button id="scrollLeftBtn" style="position: absolute; left: -22px; top: 50%; transform: translateY(-50%); background-color: rgba(152, 103, 191, 0.7); border: none; color: white; font-size: 2em; padding: 10px 15px; cursor: pointer; border-radius: 5px; z-index: 10;">&#10094;</button>
+        <button id="scrollRightBtn" style="position: absolute; right: -22px; top: 50%; transform: translateY(-50%); background-color: rgba(152, 103, 191, 0.7); border: none; color: white; font-size: 2em; padding: 10px 15px; cursor: pointer; border-radius: 5px; z-index: 10;">&#10095;</button>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const coursesContainer = document.getElementById('courses-container');
+        const scrollLeftBtn = document.getElementById('scrollLeftBtn');
+        const scrollRightBtn = document.getElementById('scrollRightBtn');
+
+        // Перевіряємо, чи існують усі потрібні елементи на сторінці
+        if (!coursesContainer || !scrollLeftBtn || !scrollRightBtn) {
+            console.error("Один або декілька елементів для слайдера не знайдено.");
+            return;
+        }
+
+        const scroll = () => {
+            // Динамічно визначаємо ширину видимої області контейнера
+            const scrollAmount = coursesContainer.clientWidth;
+
+            // Прокрутка вліво
+            scrollLeftBtn.addEventListener('click', function() {
+                coursesContainer.scrollBy({
+                    left: -scrollAmount,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Прокрутка вправо
+            scrollRightBtn.addEventListener('click', function() {
+                coursesContainer.scrollBy({
+                    left: scrollAmount,
+                    behavior: 'smooth'
+                });
+            });
+        };
+
+        const toggleScrollButtons = () => {
+            // Додаємо допуск в 1px, щоб уникнути проблем з заокругленням значень
+            const isAtStart = coursesContainer.scrollLeft < 1;
+            const isAtEnd = Math.ceil(coursesContainer.scrollWidth - coursesContainer.scrollLeft) <= coursesContainer.clientWidth + 1;
+
+            scrollLeftBtn.style.display = isAtStart ? 'none' : 'block';
+            scrollRightBtn.style.display = isAtEnd ? 'none' : 'block';
+        };
+
+        // Запускаємо основну функцію прокрутки
+        scroll();
+
+        // Додаємо слухачі подій для оновлення стану кнопок
+        coursesContainer.addEventListener('scroll', toggleScrollButtons);
+        
+        // Використовуємо ResizeObserver для відстеження зміни розміру контейнера,
+        // це надійніше, ніж відстежувати зміну розміру всього вікна.
+        new ResizeObserver(toggleScrollButtons).observe(coursesContainer);
+
+        // Початкова перевірка стану кнопок при завантаженні сторінки
+        toggleScrollButtons();
+    });
+</script>
+
+
+
+</body>
+</html>
